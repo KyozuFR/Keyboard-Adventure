@@ -3,38 +3,29 @@ package fr.ubordeaux.ao.keyboardadventure.model;
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Battle {
 
     // Properties :
-    private static final long DELAY = 10; // Attack delay in s
+    private static final long PERIOD = 10; // Attack delay in s
     private Player player;
-    private Timer timer;
     private List<Enemy> enemies;
-
+    private long clock;
+    private long prevDateTime;
 
     // Constructor :
     public Battle(Player player, List<Enemy> enemies) {
         this.player = player;
         this.enemies = enemies;
-
-        this.timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                enemiesAttack();
-            }
-        };
-        timer.schedule(task, DELAY * 1000);
+        this.clock = 0;
+        this.prevDateTime = System.currentTimeMillis();
     }
 
     // Methods :
     public void run() {
         start();
         while(!isOver()) {
-            System.out.println("Run");
+            processClock();
         }
     }
 
@@ -73,6 +64,17 @@ public class Battle {
             if(word.compareTo(enemy.getWord()) == 0) {
                 player.attack(enemy);
             }
+        }
+    }
+
+    public void processClock() {
+        long currentDateTime = System.currentTimeMillis();
+        clock += currentDateTime - prevDateTime;
+        prevDateTime = currentDateTime;
+
+        if(clock >= PERIOD * 1000) {
+            this.enemiesAttack();
+            clock = 0;
         }
     }
 }
