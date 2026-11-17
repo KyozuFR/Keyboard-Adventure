@@ -1,5 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
+import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
+
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
