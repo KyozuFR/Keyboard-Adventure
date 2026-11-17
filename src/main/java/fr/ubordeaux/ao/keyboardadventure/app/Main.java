@@ -1,4 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.app;
+import fr.ubordeaux.ao.keyboardadventure.model.enemie.Ienem;
+import fr.ubordeaux.ao.keyboardadventure.model.enemie.dummyenemie;
+import fr.ubordeaux.ao.keyboardadventure.model.enemie.enemieBuilder;
 import fr.ubordeaux.ao.mazing.Scene;
 import fr.ubordeaux.ao.mazing.view.Orientation;
 import fr.ubordeaux.ao.mazing.view.entity.AnimatedEntity;
@@ -19,6 +22,8 @@ public final class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::showScene);
+        Ienem dummy = enemieBuilder.baseEnemy().dummyEnemy().build();
+        System.out.println(dummy.getWord());
     }
 
     private static void showScene() {
