@@ -6,6 +6,7 @@ import fr.ubordeaux.ao.mazing.view.entity.Entity;
 import fr.ubordeaux.ao.mazing.view.entity.FloorTile;
 import fr.ubordeaux.ao.mazing.view.sprite.AnimatedSprites;
 import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
+import fr.ubordeaux.ao.keyboardadventure.controller.KeyboardController;
 
 import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
@@ -27,6 +28,10 @@ public final class Main {
         Scene scene = new Scene(
                 800, 600,
                 SCENE_SIZE, SCENE_SIZE);
+
+        KeyboardController keyboard = new KeyboardController();
+        scene.getPanel().addKeyListener(keyboard);
+        scene.getPanel().setFocusable(true);
 
         // Ajout du sol.
         for (int x = 0; x < SCENE_SIZE; x++) {
