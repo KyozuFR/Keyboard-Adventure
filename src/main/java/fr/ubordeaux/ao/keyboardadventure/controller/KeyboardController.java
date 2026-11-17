@@ -7,6 +7,13 @@ public class KeyboardController extends KeyAdapter{
 
     @Override
     public void keyTyped(KeyEvent key) {
-        System.out.println("key:" + key.getKeyChar());
+        char c = key.getKeyChar();
+        if (c == '\n') {
+            //todo battle.submitWord();
+        } else if (c == '\b') {
+            //todo player.eraseChar();
+        } else {
+            //todo player.typeChar(c);
+        }
     }
 }
