@@ -20,6 +20,13 @@ public class Player implements Entity {
         currentWord += c;
     }
 
+    public void eraseChar() {
+        if(currentWord == null || currentWord.isEmpty()) {
+            return;
+        }
+        currentWord = currentWord.substring(0, currentWord.length()-1);
+    }
+
     public String submitWord() {
         String result = currentWord;
         currentWord = "";
