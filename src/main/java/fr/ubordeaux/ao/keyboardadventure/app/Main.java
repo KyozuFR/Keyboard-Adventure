@@ -1,6 +1,9 @@
 package fr.ubordeaux.ao.keyboardadventure.app;
+import fr.ubordeaux.ao.keyboardadventure.controller.Controller;
+import fr.ubordeaux.ao.keyboardadventure.model.Model;
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.EnemyBuilder;
+import fr.ubordeaux.ao.keyboardadventure.view.View;
 import fr.ubordeaux.ao.mazing.Scene;
 import fr.ubordeaux.ao.mazing.view.Orientation;
 import fr.ubordeaux.ao.mazing.view.entity.AnimatedEntity;
@@ -28,12 +31,17 @@ public final class Main {
 
     private static void showScene() {
 
+        View view = new View();
+        Model model = new Model();
+        Controller controller = new Controller(view, model);
+        KeyboardController keyboard = new KeyboardController(controller);
+
         // Création d'une scène automatiquement centrée.
         Scene scene = new Scene(
                 800, 600,
                 SCENE_SIZE, SCENE_SIZE);
 
-        KeyboardController keyboard = new KeyboardController();
+
         scene.getPanel().addKeyListener(keyboard);
         scene.getPanel().setFocusable(true);
 

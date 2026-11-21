@@ -5,15 +5,25 @@ import java.awt.event.KeyEvent;
 
 public class KeyboardController extends KeyAdapter{
 
+    // Properties :
+    Controller controller;
+
+    // Constructors :
+    public KeyboardController(Controller controller) {
+        super();
+        this.controller = controller;
+    }
+
+    // Methods :
     @Override
     public void keyTyped(KeyEvent key) {
         char c = key.getKeyChar();
         if (c == '\n') {
-            //todo battle.submitWord();
+            controller.submitWord();
         } else if (c == '\b') {
-            //todo player.eraseChar();
+            controller.eraseChar();
         } else {
-            //todo player.typeChar(c);
+            controller.typeChar(c);
         }
     }
 }
