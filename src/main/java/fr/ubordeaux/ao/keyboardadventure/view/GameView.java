@@ -10,7 +10,7 @@ import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
 
 import javax.swing.*;
 
-public class GameView implements Observer {
+public class GameView extends View implements Observer {
     private static final int SCENE_SIZE = 10;
     private final Scene scene;
 
@@ -46,9 +46,8 @@ public class GameView implements Observer {
     }
 
 
-
     @Override
     public void update() {
-        //todo
+        // TODO
     }
 }

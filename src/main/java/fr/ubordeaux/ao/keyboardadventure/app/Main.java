@@ -1,4 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.app;
+import fr.ubordeaux.ao.keyboardadventure.controller.Controller;
+import fr.ubordeaux.ao.keyboardadventure.controller.KeyboardController;
+import fr.ubordeaux.ao.keyboardadventure.model.Model;
 import fr.ubordeaux.ao.keyboardadventure.view.GameView;
 
 import javax.swing.SwingUtilities;
@@ -13,7 +16,12 @@ public final class Main {
     }
 
     private static void showScene() {
+        Model model = new Model();
         GameView view = new GameView();
+        Controller controller = new Controller(view, model);
+        KeyboardController keyboardController = new KeyboardController(controller);
+        view.getPanel().addKeyListener(keyboardController);
+        model.addObserver(view);
     }
 }
 
