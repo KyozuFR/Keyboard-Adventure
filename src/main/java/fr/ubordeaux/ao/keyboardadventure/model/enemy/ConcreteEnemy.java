@@ -5,8 +5,8 @@ import fr.ubordeaux.ao.keyboardadventure.model.Entity;
 public class ConcreteEnemy implements Enemy {
 
     // Properties :
-    private int maxHP = 1;
-    private int HP = maxHP;
+    private int maxHealth = 1;
+    private int health = maxHealth;
     private String word = "araigne";
     private  int damage = 1;
 
@@ -15,9 +15,9 @@ public class ConcreteEnemy implements Enemy {
 
     }
 
-    public ConcreteEnemy(int HP, String word,int damage){
-        this.maxHP = HP;
-        this.HP = maxHP;
+    public ConcreteEnemy(int health, String word, int damage){
+        this.maxHealth = health;
+        this.health = maxHealth;
         this.word = word;
         this.damage = damage;
     }
@@ -35,20 +35,20 @@ public class ConcreteEnemy implements Enemy {
 
     @Override
     public void hurt(int damage) {
-        HP -= damage;
-        if(HP<=0){
+        health -= damage;
+        if(health <=0){
             die();
         }
     }
 
     @Override
     public int getHealth() {
-        return this.HP;
+        return this.health;
     }
 
     @Override
     public void reset() {
-        HP = maxHP;
+        health = maxHealth;
     }
 
     private void die(){
