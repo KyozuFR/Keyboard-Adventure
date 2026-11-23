@@ -16,7 +16,8 @@ public class KeyboardController extends KeyAdapter{
 
     // Methods :
     @Override
-    public void keyTyped(KeyEvent key) {
+    public void keyPressed(KeyEvent key) {
+        System.out.println("Key pressed !");
         char c = key.getKeyChar();
         if (c == '\n') {
             controller.submitWord();

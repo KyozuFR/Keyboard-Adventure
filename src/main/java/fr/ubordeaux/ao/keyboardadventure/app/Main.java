@@ -4,7 +4,7 @@ import fr.ubordeaux.ao.keyboardadventure.controller.KeyboardController;
 import fr.ubordeaux.ao.keyboardadventure.model.Model;
 import fr.ubordeaux.ao.keyboardadventure.view.GameView;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * Exemple minimal : un sol en pierre et un personnage animé.
@@ -20,8 +20,12 @@ public final class Main {
         GameView view = new GameView();
         Controller controller = new Controller(view, model);
         KeyboardController keyboardController = new KeyboardController(controller);
-        view.getPanel().addKeyListener(keyboardController);
+
+        JTextArea area = new JTextArea();
+        area.addKeyListener(keyboardController);
+        view.getPanel().add(area);
         model.addObserver(view);
+        System.out.println("Fait");
     }
 }
 
