@@ -1,17 +1,13 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
-public class Player implements Entity {
+public class Player extends Entity {
 
     // Properties :
-    private int maxHealth;
-    private int health;
     private String currentWord;
-    private int attack;
 
     // Constructor :
-    public Player(int health) {
-        this.maxHealth = health;
-        this.health = health;
+    public Player(int health,int Damage) {
+        super(health,Damage);
         this.currentWord = "";
     }
 
@@ -24,26 +20,6 @@ public class Player implements Entity {
         String result = currentWord;
         currentWord = "";
         return result;
-    }
-
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    @Override
-    public void attack(Entity entity) {
-        entity.hurt(attack);
-    }
-
-    @Override
-    public void hurt(int damage) {
-        this.health -= damage;
-    }
-
-    @Override
-    public void reset() {
-        health = maxHealth;
     }
 }
 

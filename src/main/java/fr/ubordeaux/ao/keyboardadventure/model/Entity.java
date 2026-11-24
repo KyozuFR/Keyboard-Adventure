@@ -1,15 +1,39 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
-public interface Entity {
+public abstract class Entity {
 
-    void attack(Entity entity);
+    private int maxHealth;
+    private int health;
+    private int attack;
+    private  boolean isAlive = true;
 
-    void hurt(int damage);
+    public  Entity(int health, int attack ){
+        this.health = health;
+        this.maxHealth = health;
+        this.attack = attack;
+    }
 
-    int getHealth();
+    
+    public void attack(Entity entity) {
+        entity.hurt(attack);
+    }
 
-    /*
-     * Reset Entity health to his max
-     */
-    void reset();
+    
+    public void hurt(int damage) {
+        this.health -= damage;
+    }
+
+    
+    public void reset() {
+        health = maxHealth;
+        isAlive = true;
+    }
+     
+    public  boolean isAlive(){
+        return isAlive;
+    }
+    
+    public  void  die(){
+        isAlive = false;
+    }
 }

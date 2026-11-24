@@ -40,7 +40,7 @@ public class Battle {
 
     public void start() {
         // Restore enemies health
-        for(Entity entity : enemies) {
+        for(Enemy entity : enemies) {
             entity.reset();
         }
     }
@@ -48,13 +48,13 @@ public class Battle {
     public boolean isOver() {
 
         // Condition de défaite (le joueur est vaincu)
-        if(player.getHealth() <= 0) {
+        if(!player.isAlive()) {
             return true;
         }
 
         // Condition de victoire (tous les ennemy sont vaincus)
         for(Enemy enemy : enemies) {
-            if (enemy.getHealth() > 0) {
+            if(enemy.isAlive()){
                 return false;
             }
         }
@@ -71,7 +71,7 @@ public class Battle {
         String word = player.submitWord();
         for(Enemy enemy : enemies) {
             if(word.compareTo(enemy.getWord()) == 0) {
-                player.attack(enemy);
+                player.attack((Entity) enemy);
             }
         }
     }

@@ -20,21 +20,25 @@ abstract class EnemyDecorator implements Enemy {
 
     @Override
     public void attack(Entity entity) {
-
+        enemyDecorator.attack(entity);
     }
 
     @Override
     public void hurt(int damage) {
-
-    }
-
-    @Override
-    public int getHealth() {
-        return 0;
+        enemyDecorator.hurt(damage);
     }
 
     @Override
     public void reset() {
+        enemyDecorator.reset();
+    }
 
+    @Override 
+    public  void die(){
+        enemyDecorator.die();
+    }
+    @Override 
+    public boolean isAlive(){
+        return enemyDecorator.isAlive();
     }
 }
