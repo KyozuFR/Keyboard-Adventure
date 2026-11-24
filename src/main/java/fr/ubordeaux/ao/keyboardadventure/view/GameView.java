@@ -10,25 +10,30 @@ import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
 
 import javax.swing.*;
 
-public class GameView implements Observer {
-    private static final int SCENE_SIZE = 10;
-    private final Scene scene;
+public class GameView extends View implements Observer {
 
+    // Constants :
+    private static final int SCENE_SIZE = 10;
+
+    // Properties :
+    private final Scene scene;
+    private PlayerEntity player;
+
+    // Constructors :
     public GameView() {
-        scene = new Scene(
+        this.scene = new Scene(
                 800, 600,
                 SCENE_SIZE, SCENE_SIZE);
         floor();
 
-        // Personnage animé.
-        scene.addRenderable(new AnimatedEntity(
-                AnimatedSprites.CRUSADER_IDLE,
-                Orientation.SOUTH_EAST,
-                4, 5, 0));
+        // Personnage :
+        this.player = new PlayerEntity();
+        scene.addRenderable(player);
         scene.startAnimation(24);
         scene.show();
     }
 
+    // Methods :
     private void floor(){
         // Ajout du sol.
         for (int x = 0; x < SCENE_SIZE; x++) {
@@ -45,10 +50,8 @@ public class GameView implements Observer {
         return scene.getPanel();
     }
 
-
-
     @Override
     public void update() {
-        //todo
+        // TODO
     }
 }
