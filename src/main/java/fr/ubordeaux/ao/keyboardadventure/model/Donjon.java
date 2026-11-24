@@ -1,5 +1,8 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
+import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Donjon {
@@ -25,7 +28,13 @@ public class Donjon {
         start(player);
         while (!isOver()) {
             Battle battle = getCurrentBattle();
-            Model.notifyStartBattleObservers(battle.countEnemy());
+
+            List<String> labels = new ArrayList<>();
+            for(Enemy enemy : battle.getEnemies()) {
+                labels.add(enemy.getWord());
+            }
+
+            Model.notifyStartBattleObservers(battle.countEnemy(), labels);
             battle.run();
             nextBattle();
         }

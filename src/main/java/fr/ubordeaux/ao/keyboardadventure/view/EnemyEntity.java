@@ -7,10 +7,11 @@ import fr.ubordeaux.ao.mazing.view.sprite.AnimatedSprites;
 public class EnemyEntity extends AnimatedEntity {
 
     // Properties :
+    private String word;
 
     // Constructors :
     public EnemyEntity() {
-        super(AnimatedSprites.SPIDER_WALK, Orientation.SOUTH, 4, 5, 0);
+        this(4, 5, 0);
     }
     public EnemyEntity(int xPosition, int yPosition, int zPosition) {
         super(AnimatedSprites.SPIDER_WALK, Orientation.SOUTH, xPosition, yPosition, zPosition);

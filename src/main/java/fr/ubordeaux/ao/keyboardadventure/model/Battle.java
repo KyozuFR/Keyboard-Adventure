@@ -81,4 +81,8 @@ public class Battle {
     public int countEnemy() {
         return enemies.size();
     }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
 }

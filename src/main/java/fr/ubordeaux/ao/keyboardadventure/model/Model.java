@@ -67,9 +67,9 @@ public class Model implements Subject {
         observers.remove(o);
     }
 
-    public static void notifyStartBattleObservers(int n) {
+    public static void notifyStartBattleObservers(int n, List<String> labels) {
         for(Observer o : observers) {
-            o.updateStartBattle(n);
+            o.updateStartBattle(n, labels);
         }
     }
 

@@ -9,6 +9,7 @@ import fr.ubordeaux.ao.mazing.view.sprite.AnimatedSprites;
 import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,7 @@ public class GameView extends View implements Observer {
     private final Scene scene;
     private PlayerEntity player;
     private List<EnemyEntity> enemies;
+    private List<Label> enemyLabels;
 
     // Constructors :
     public GameView() {
@@ -35,6 +37,9 @@ public class GameView extends View implements Observer {
         scene.show();
 
         this.enemies = new ArrayList<>();
+        this.enemyLabels = new ArrayList<>();
+
+        getPanel().setLayout(null);
     }
 
     // Methods :
@@ -60,20 +65,42 @@ public class GameView extends View implements Observer {
     }
 
     @Override
-    public void updateStartBattle(int n) {
+    public void updateStartBattle(int n, List<String> words) {
+
+        // Clear ceux de l'ancienne battle :
+        // TODO : Le mettre autre part
+        for(EnemyEntity entity : enemies) {
+            scene.removeRenderable(entity);
+        }
+        enemies.clear();
+
+        for(Label label : enemyLabels) {
+            getPanel().remove(label);
+        }
+        enemyLabels.clear();
+
+
         for(int i = 0; i < n; i++) {
-            EnemyEntity entity = new EnemyEntity(7+i, 20, 0);
+            EnemyEntity entity = new EnemyEntity(7+i, 18, 0);
             scene.addRenderable(entity);
             enemies.add(entity);
 
-            for(int j = 0; i < 16; i++) {
-                entity.moveBy(0, -0.25);
+            for(int j = 0; j < 24; j++) {
+                entity.moveInDirection(0, -0.25);
                 try {
                     TimeUnit.MILLISECONDS.sleep(50);
                 } catch (Exception e) {
 
                 }
             }
+        }
+
+        for(int i = 0; i < n; i++) {
+            EnemyEntity entity = enemies.get(i);
+            Label label = new Label(words.get(i), 18);
+            // label.setPos(entity.X(), entity.Y());
+            enemyLabels.add(label);
+            getPanel().add(label);
         }
     }
 
@@ -88,6 +115,12 @@ public class GameView extends View implements Observer {
 
         }
 
+        // On remove son mot
+        Label label = enemyLabels.get(index);
+        enemyLabels.remove(label);
+        getPanel().remove(label);
+        
+        // On remove la spider
         enemies.remove(entity);
         scene.removeRenderable(entity);
     }
