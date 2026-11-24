@@ -77,4 +77,8 @@ public class Battle {
             clock = 0;
         }
     }
+
+    public int countEnemy() {
+        return enemies.size();
+    }
 }

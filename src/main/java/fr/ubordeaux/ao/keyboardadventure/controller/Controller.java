@@ -35,4 +35,8 @@ public class Controller {
             model.eraseChar();
         });
     }
+
+    public void executeAll() {
+        commands.executeAll();
+    }
 }

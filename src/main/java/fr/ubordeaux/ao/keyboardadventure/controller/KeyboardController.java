@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class KeyboardController extends KeyAdapter{
 
     // Properties :
-    Controller controller;
+    private Controller controller;
 
     // Constructors :
     public KeyboardController(Controller controller) {
@@ -17,7 +17,6 @@ public class KeyboardController extends KeyAdapter{
     // Methods :
     @Override
     public void keyPressed(KeyEvent key) {
-        System.out.println("Key pressed !");
         char c = key.getKeyChar();
         if (c == '\n') {
             controller.submitWord();

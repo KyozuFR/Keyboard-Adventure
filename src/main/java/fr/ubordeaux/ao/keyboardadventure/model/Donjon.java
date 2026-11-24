@@ -25,6 +25,7 @@ public class Donjon {
         start(player);
         while (!isOver()) {
             Battle battle = getCurrentBattle();
+            Model.notifyStartBattleObservers(battle.countEnemy());
             battle.run();
             nextBattle();
         }

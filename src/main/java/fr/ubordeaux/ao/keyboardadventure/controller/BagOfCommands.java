@@ -16,6 +16,7 @@ public class BagOfCommands {
     // Methods :
     public void add(Command command) {
         this.commands.add(command);
+        System.out.println(commands.size());
     }
 
     public void executeLast() {
@@ -27,9 +28,8 @@ public class BagOfCommands {
     }
 
     public void executeAll() {
-        for(Command command : commands) {
-            command.execute();
+        while(!commands.isEmpty()) {
+            executeLast();
         }
-        this.commands.clear();
     }
 }

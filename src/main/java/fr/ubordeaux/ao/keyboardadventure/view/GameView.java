@@ -13,7 +13,7 @@ import javax.swing.*;
 public class GameView extends View implements Observer {
 
     // Constants :
-    private static final int SCENE_SIZE = 10;
+    private static final int SCENE_SIZE = 20;
 
     // Properties :
     private final Scene scene;
@@ -27,7 +27,7 @@ public class GameView extends View implements Observer {
         floor();
 
         // Personnage :
-        this.player = new PlayerEntity();
+        this.player = new PlayerEntity(10, 7, 0);
         scene.addRenderable(player);
         scene.startAnimation(24);
         scene.show();
@@ -54,4 +54,14 @@ public class GameView extends View implements Observer {
     public void update() {
         // TODO
     }
+
+    @Override
+    public void updateStartBattle(int n) {
+        for(int i = 0; i < n; i++) {
+            EnemyEntity entity = new EnemyEntity(7+i, 20, 0);
+            entity.move(0, -8);
+            scene.addRenderable(entity);
+        }
+    }
+
 }

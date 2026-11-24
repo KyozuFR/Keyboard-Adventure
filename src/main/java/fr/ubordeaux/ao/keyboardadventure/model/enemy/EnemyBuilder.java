@@ -6,16 +6,16 @@ public class EnemyBuilder {
     private Enemy enemy;
 
     // Constructors :
-    private EnemyBuilder(ConcreteEnemy enemy){
+    private EnemyBuilder(ConcreteEnemy enemy) {
         this.enemy = enemy;
     }
 
     // Constructors
-    public static EnemyBuilder baseEnemy(){
+    public static EnemyBuilder baseEnemy() {
         return new EnemyBuilder(new ConcreteEnemy());
     }
 
-    public EnemyBuilder dummyEnemy(){
+    public EnemyBuilder dummyEnemy() {
         this.enemy = new DummyEnemyDecorator(enemy);
         return this;
     }
