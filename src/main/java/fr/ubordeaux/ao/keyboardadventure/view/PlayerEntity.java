@@ -27,4 +27,8 @@ public class PlayerEntity extends AnimatedEntity {
     public void setAttackAnimation() {
         setSprite(AnimatedSprites.CRUSADER_ATTACK);
     }
+
+    public void setHitAnimation() {
+        setSprite(AnimatedSprites.CRUSADER_HIT);
+    }
 }
