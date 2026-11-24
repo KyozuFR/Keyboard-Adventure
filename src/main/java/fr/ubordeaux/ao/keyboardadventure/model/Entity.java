@@ -13,26 +13,26 @@ public abstract class Entity {
         this.attack = attack;
     }
 
-    
+
     public void attack(Entity entity) {
         entity.hurt(attack);
     }
 
-    
+
     public void hurt(int damage) {
         this.health -= damage;
     }
 
-    
+
     public void reset() {
         health = maxHealth;
         isAlive = true;
     }
-     
+
     public  boolean isAlive(){
         return isAlive;
     }
-    
+
     public  void  die(){
         isAlive = false;
     }

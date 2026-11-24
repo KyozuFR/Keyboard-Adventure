@@ -75,4 +75,8 @@ public class Battle {
             }
         }
     }
+
+    public void addEnnemy(Enemy enemy){
+        enemies.add(enemy);
+    }
 }
