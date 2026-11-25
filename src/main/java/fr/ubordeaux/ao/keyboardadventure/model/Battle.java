@@ -2,6 +2,7 @@ package fr.ubordeaux.ao.keyboardadventure.model;
 
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,7 +77,7 @@ public class Battle {
         }
     }
 
-    public void addEnnemy(Enemy enemy){
+    public void addEnemy(Enemy enemy){
         enemies.add(enemy);
     }
 }

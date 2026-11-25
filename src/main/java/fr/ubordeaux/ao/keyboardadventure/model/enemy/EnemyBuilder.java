@@ -20,6 +20,17 @@ public class EnemyBuilder {
         return this;
     }
 
+    public EnemyBuilder fireEnemy(){
+        //voir pour battle
+        this.enemy = new FireEnemyDecorator(enemy,null);
+        return this;
+    }
+
+    public EnemyBuilder fireBall(){
+        this.enemy = new FireBallEnemyDecorator(enemy);
+        return this;
+    }
+
     public Enemy build(){
         return enemy;
     }
