@@ -33,6 +33,7 @@ public class GameView extends View implements Observer {
 
     // Constructors :
     public GameView() {
+
         this.renderer = new IsometricRenderer(0, 0);
         this.renderer.setDebug(DEBUG);
         this.renderer.setZoom(ZOOM);
@@ -53,9 +54,10 @@ public class GameView extends View implements Observer {
 
         // Add label for currentWord :
         this.currentWordLabel = new Label();
-        this.currentWordLabel.setBounds(0, scene.getPanel().getWidth() / 2, 500, 20);
+        this.currentWordLabel.setBounds(0, 0, 800, 25);
         getPanel().add(this.currentWordLabel);
 
+        // Enemies :
         this.enemies = new ArrayList<>();
         this.enemyLabels = new ArrayList<>();
     }

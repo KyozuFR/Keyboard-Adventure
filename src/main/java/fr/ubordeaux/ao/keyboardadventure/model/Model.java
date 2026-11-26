@@ -44,6 +44,7 @@ public class Model implements Subject {
     public void submitWord() {
         donjon.getCurrentBattle().playerSubmit();
         notifyWordObservers();
+        notifyPlayerAttackObservers();
     }
 
     public void typeChar(char c) {
@@ -75,6 +76,12 @@ public class Model implements Subject {
     public void notifyWordObservers() {
         for(Observer o : observers) {
             o.updateWord(player.getCurrentWord());
+        }
+    }
+
+    public void notifyPlayerAttackObservers() {
+        for(Observer o : observers) {
+            o.updatePlayerAttack();
         }
     }
 

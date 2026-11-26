@@ -7,7 +7,7 @@ import java.util.List;
 public class Battle {
 
     // Properties :
-    private static final long PERIOD = 10; // Attack delay in s
+    private static final long PERIOD = 7; // Attack delay in s
     private Player player;
     private List<Enemy> enemies;
     private long clock;
