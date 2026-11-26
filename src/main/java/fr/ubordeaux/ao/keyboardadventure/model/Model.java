@@ -13,10 +13,12 @@ public class Model implements Subject {
     private Donjon donjon;
     private Player player;
     private static List<Observer> observers;
+    private ModelState state;
 
     // Constructors :
     public Model() {
         Model.observers = new ArrayList<>();
+        state =  new ModelDonjon(this, player, donjon);
     }
 
     // Methods :
@@ -42,17 +44,17 @@ public class Model implements Subject {
     }
 
     public void submitWord() {
-        donjon.getCurrentBattle().playerSubmit();
+        state.submitWord();
         notifyObservers();
     }
 
     public void typeChar(char c) {
-        player.writeChar(c);
+        state.typeChar(c);
         notifyObservers();
     }
 
     public void eraseChar() {
-        player.eraseChar();
+        state.eraseChar();
         notifyObservers();
     }
 
@@ -68,7 +70,9 @@ public class Model implements Subject {
 
     public static void notifyStartBattleObservers(int n, List<String> labels) {
         for(Observer o : observers) {
-            o.updateStartBattle(n, labels);
+            if (o instanceof BattleObserver b) {
+                o.updateStartBattle(n, labels);
+            }
         }
     }
 

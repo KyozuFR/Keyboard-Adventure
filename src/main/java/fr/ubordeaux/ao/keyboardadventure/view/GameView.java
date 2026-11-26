@@ -1,5 +1,6 @@
 package fr.ubordeaux.ao.keyboardadventure.view;
 
+import fr.ubordeaux.ao.keyboardadventure.model.DonJonObserver;
 import fr.ubordeaux.ao.keyboardadventure.model.Observer;
 import fr.ubordeaux.ao.mazing.Scene;
 import fr.ubordeaux.ao.mazing.view.Orientation;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class GameView extends View implements Observer {
+public class GameView extends View implements DonJonObserver {
 
     // Constants :
     private static final int SCENE_SIZE = 20;
