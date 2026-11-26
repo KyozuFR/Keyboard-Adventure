@@ -3,8 +3,10 @@ package fr.ubordeaux.ao.keyboardadventure.view;
 import fr.ubordeaux.ao.keyboardadventure.model.Observer;
 import fr.ubordeaux.ao.mazing.Scene;
 import fr.ubordeaux.ao.mazing.view.Orientation;
+import fr.ubordeaux.ao.mazing.view.Point;
 import fr.ubordeaux.ao.mazing.view.entity.AnimatedEntity;
 import fr.ubordeaux.ao.mazing.view.entity.FloorTile;
+import fr.ubordeaux.ao.mazing.view.renderer.IsometricRenderer;
 import fr.ubordeaux.ao.mazing.view.sprite.AnimatedSprites;
 import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
 
@@ -17,29 +19,39 @@ import java.util.concurrent.TimeUnit;
 public class GameView extends View implements Observer {
 
     // Constants :
-    private static final int SCENE_SIZE = 20;
+    private static final int SCENE_SIZE = 10;
+    private static final int ZOOM = 2;
+    private static final boolean DEBUG = true;
 
     // Properties :
     private final Scene scene;
     private PlayerEntity player;
     private List<EnemyEntity> enemies;
     private List<Label> enemyLabels;
+    private IsometricRenderer renderer;
 
     // Constructors :
     public GameView() {
+        this.renderer = new IsometricRenderer(0, 0);
+        this.renderer.setDebug(DEBUG);
+        this.renderer.setZoom(ZOOM);
+
         this.scene = new Scene(800, 600, SCENE_SIZE, SCENE_SIZE);
+        scene.setDebug(DEBUG);
+
+        getPanel().setLayout(null);
+
         floor();
 
-        // Personnage :
-        this.player = new PlayerEntity(10, 7, 0);
+        // Player :
+        this.player = new PlayerEntity(5, 2, 0);
         scene.addRenderable(player);
         scene.startAnimation(24);
+        scene.setZoom(ZOOM);
         scene.show();
 
         this.enemies = new ArrayList<>();
         this.enemyLabels = new ArrayList<>();
-
-        getPanel().setLayout(null);
     }
 
     // Methods :
@@ -64,11 +76,7 @@ public class GameView extends View implements Observer {
         // TODO
     }
 
-    @Override
-    public void updateStartBattle(int n, List<String> words) {
-
-        // Clear ceux de l'ancienne battle :
-        // TODO : Le mettre autre part
+    private void cleanEntity() {
         for(EnemyEntity entity : enemies) {
             scene.removeRenderable(entity);
         }
@@ -78,10 +86,11 @@ public class GameView extends View implements Observer {
             getPanel().remove(label);
         }
         enemyLabels.clear();
+    }
 
-
+    private void addEnemies(int n) {
         for(int i = 0; i < n; i++) {
-            EnemyEntity entity = new EnemyEntity(7+i, 18, 0);
+            EnemyEntity entity = new EnemyEntity(4+i, 12, 0);
             scene.addRenderable(entity);
             enemies.add(entity);
 
@@ -94,14 +103,30 @@ public class GameView extends View implements Observer {
                 }
             }
         }
+    }
 
+    private void addLabels(int n, List<String> words) {
         for(int i = 0; i < n; i++) {
             EnemyEntity entity = enemies.get(i);
-            Label label = new Label(words.get(i), 18);
-            // label.setPos(entity.X(), entity.Y());
+            String word = words.get(i);
+
+            Label label = new Label(word, 15);
+            FontMetrics metrics = getPanel().getFontMetrics(label.getFont());
+
+            // On ne comprends pas pourquoi il faut rajouter ces +3 et -7 mais sans eux la projection ne les place pas bien
+            Point position = renderer.projectWorld(entity.getX() + 3, entity.getY() - 7, entity.getZ());
+            label.setBounds(position.x(), position.y(), metrics.stringWidth(words.get(i)), metrics.getHeight());
+
             enemyLabels.add(label);
             getPanel().add(label);
         }
+    }
+
+    @Override
+    public void updateStartBattle(int n, List<String> words) {
+        cleanEntity();
+        addEnemies(n);
+        addLabels(n, words);
     }
 
     @Override
