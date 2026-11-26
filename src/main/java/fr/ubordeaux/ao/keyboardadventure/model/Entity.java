@@ -1,5 +1,10 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
+import fr.ubordeaux.ao.keyboardadventure.model.Debuff.Debuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Entity {
 
     private int maxHealth;
@@ -13,7 +18,9 @@ public abstract class Entity {
         this.attack = attack;
     }
 
-
+    public void addDebuff(Debuff debuff){
+        debuff.applyEffect(this);
+    }
     public void attack(Entity entity) {
         entity.hurt(attack);
     }

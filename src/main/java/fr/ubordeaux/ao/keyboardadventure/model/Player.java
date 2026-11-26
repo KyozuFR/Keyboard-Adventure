@@ -1,5 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
+import fr.ubordeaux.ao.keyboardadventure.model.Debuff.Debuff;
+
 public class Player extends Entity {
 
     // Properties :
@@ -11,11 +13,12 @@ public class Player extends Entity {
         this.currentWord = "";
     }
 
+
     @Override
     public void hurt(int damage){
         super.hurt(damage);
-        System.out.println("Player took" + damage + "damage");
-        System.out.println("current life" + this.health);
+        System.out.println("Player took " + damage + " damage");
+        System.out.println("current life: " + this.health);
     }
     // Methods :
     public void writeChar(char c) {

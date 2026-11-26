@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import fr.ubordeaux.ao.keyboardadventure.model.Battle;
+import fr.ubordeaux.ao.keyboardadventure.model.Debuff.FireDebuff;
 import fr.ubordeaux.ao.keyboardadventure.model.Entity;
 public class FireBallEnemyDecorator extends EnemyDecorator{
  //ms
@@ -17,12 +18,13 @@ public class FireBallEnemyDecorator extends EnemyDecorator{
 
     @Override
     public void attack(Entity entity){
-        Timer timer = new Timer("mon-timer");
+        Timer timer = new Timer("FireBall Timer");
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 try {
                     entity.hurt(DAMAGE);
+                    entity.addDebuff(new FireDebuff());
                 } finally {
                     timer.cancel();
                 }
