@@ -32,7 +32,7 @@ public final class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::showScene);
         Enemy dummy = EnemyBuilder.baseEnemy().dummyEnemy().build();
-        Battle battle = new  Battle(Arrays.asList(dummy,EnemyBuilder.baseEnemy().fireEnemy().build()));
+        Battle battle = new Battle(Arrays.asList(dummy,EnemyBuilder.baseEnemy().fireEnemy().build()));
         List<Battle> battles = Arrays.asList(battle);
         donjon = new Donjon(battles);
         donjon.run(player);

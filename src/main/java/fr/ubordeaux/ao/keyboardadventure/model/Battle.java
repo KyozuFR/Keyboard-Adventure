@@ -19,8 +19,7 @@ public class Battle {
     private long prevDateTime;
 
     // Constructor :
-    public Battle(Player player, List<Enemy> enemies) {
-        this.player = player;
+    public Battle(List<Enemy> enemies) {
         this.enemies = enemies;
         this.clock = 0;
         this.prevDateTime = System.currentTimeMillis();
