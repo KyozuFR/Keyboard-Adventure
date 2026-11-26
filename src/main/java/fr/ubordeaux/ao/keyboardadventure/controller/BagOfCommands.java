@@ -3,19 +3,16 @@ package fr.ubordeaux.ao.keyboardadventure.controller;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BagOfCommands {
+public enum BagOfCommands implements Runnable {
 
+    INSTANCE;
     // Properties :
-    private Queue<Command> commands;
-
-    // Constructors :
-    public BagOfCommands() {
-        this.commands = new LinkedList<>();
-    }
+    private Queue<Command> commands = new LinkedList<>();;
 
     // Methods :
-    public void add(Command command) {
+    public synchronized void add(Command command) {
         this.commands.add(command);
+        notifyAll();
     }
 
     public void executeLast() {
@@ -27,9 +24,27 @@ public class BagOfCommands {
     }
 
     public void executeAll() {
-        for(Command command : commands) {
-            command.execute();
+        while(!commands.isEmpty()) {
+            executeLast();
         }
-        this.commands.clear();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (this) {
+                while (commands.isEmpty()) {
+                    try {
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+                Command command = commands.poll();
+                command.execute();
+
+            }
+        }
+
     }
 }

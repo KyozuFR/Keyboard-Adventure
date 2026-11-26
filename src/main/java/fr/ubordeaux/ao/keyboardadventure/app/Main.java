@@ -40,16 +40,21 @@ public final class Main {
     }
 
     private static void showScene() {
+
         Model model = new Model();
         GameView view = new GameView();
         Controller controller = new Controller(view, model);
         KeyboardController keyboardController = new KeyboardController(controller);
 
-        JTextArea area = new JTextArea();
-        area.addKeyListener(keyboardController);
-        view.getPanel().add(area);
+        view.getPanel().addKeyListener(keyboardController);
+        view.getPanel().setFocusable(true);
         model.addObserver(view);
-        System.out.println("Fait");
+
+        Thread thread = new Thread(model::debugDonjon);
+        thread.start();
+
+        Thread thread_command = new Thread(BagOfCommands.INSTANCE);
+        thread_command.start();
     }
 }
 

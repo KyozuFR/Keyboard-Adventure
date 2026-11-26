@@ -10,7 +10,7 @@ import java.util.TimerTask;
 public class Battle {
 
     // Properties :
-    private static final long PERIOD = 10; // Attack delay in s
+    private static final long PERIOD = 7; // Attack delay in s
     private Player player;
     private List<Enemy> enemies;
     private List<Enemy> projectlist = new ArrayList<Enemy>();
@@ -97,5 +97,13 @@ public class Battle {
             this.enemiesAttack();
             clock = 0;
         }
+    }
+
+    public int countEnemy() {
+        return enemies.size();
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
     }
 }

@@ -10,8 +10,25 @@ public class PlayerEntity extends AnimatedEntity {
 
     // Constructors :
     public PlayerEntity() {
-        super(AnimatedSprites.CRUSADER_IDLE, Orientation.SOUTH_EAST, 4, 5, 0);
+        this(10, 4, 0);
     }
 
+    public PlayerEntity(int xPosition, int yPosition, int zPosition) {
+        super(AnimatedSprites.CRUSADER_IDLE, Orientation.NORTH, xPosition, yPosition, zPosition);
+    }
+
+
+
     // Methods :
+    public void setIdleAnimation() {
+        setSprite(AnimatedSprites.CRUSADER_IDLE);
+    }
+
+    public void setAttackAnimation() {
+        setSprite(AnimatedSprites.CRUSADER_ATTACK);
+    }
+
+    public void setHitAnimation() {
+        setSprite(AnimatedSprites.CRUSADER_HIT);
+    }
 }
