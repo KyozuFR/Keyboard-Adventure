@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.ubordeaux.ao.keyboardadventure.controller.BagOfCommands;
 import fr.ubordeaux.ao.keyboardadventure.controller.Controller;
 import fr.ubordeaux.ao.keyboardadventure.controller.KeyboardController;
 import fr.ubordeaux.ao.keyboardadventure.model.Model;

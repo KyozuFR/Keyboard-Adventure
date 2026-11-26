@@ -36,5 +36,9 @@ public class Player extends Entity {
         currentWord = "";
         return result;
     }
+
+    public String getCurrentWord(){
+        return currentWord;
+    }
 }
 
