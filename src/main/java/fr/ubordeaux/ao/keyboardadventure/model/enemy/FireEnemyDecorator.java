@@ -4,12 +4,10 @@ import fr.ubordeaux.ao.keyboardadventure.model.Battle;
 import fr.ubordeaux.ao.keyboardadventure.model.Entity;
 
 public class FireEnemyDecorator extends EnemyDecorator{
-    Battle battle;
-    EnemyBuilder FireBallBuilder;
-    public FireEnemyDecorator(Enemy enemy,Battle battle){
+    EnemyBuilder Builder;
+    public FireEnemyDecorator(Enemy enemy){
         super(enemy);
-        this.battle = battle;
-        FireBallBuilder = EnemyBuilder.baseEnemy().fireBall();
+        Builder = EnemyBuilder.baseEnemy();
     }
 
     @Override
@@ -19,6 +17,7 @@ public class FireEnemyDecorator extends EnemyDecorator{
 
     @Override 
     public void attack(Entity entity){
-      battle.addEnemy(FireBallBuilder.build());   
+      this.getBattle().addProjectile(Builder.fireBall(entity).build());
+      System.out.println("fireBall Created");
     }
 }

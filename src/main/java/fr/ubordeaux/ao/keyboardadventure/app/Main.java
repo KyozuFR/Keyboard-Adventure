@@ -1,4 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.app;
+import fr.ubordeaux.ao.keyboardadventure.model.Battle;
+import fr.ubordeaux.ao.keyboardadventure.model.Donjon;
+import fr.ubordeaux.ao.keyboardadventure.model.Player;
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.EnemyBuilder;
 import fr.ubordeaux.ao.mazing.Scene;
@@ -10,6 +13,12 @@ import fr.ubordeaux.ao.mazing.view.sprite.AnimatedSprites;
 import fr.ubordeaux.ao.mazing.view.sprite.IsometricSprites;
 
 import javax.swing.SwingUtilities;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JFrame;
 
 /**
@@ -19,9 +28,16 @@ public final class Main {
 
     private static final int SCENE_SIZE = 10;
 
+    private static final Player player = new Player(10, 10);
+
+    public static Donjon donjon;
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::showScene);
         Enemy dummy = EnemyBuilder.baseEnemy().dummyEnemy().build();
+        Battle battle = new  Battle(Arrays.asList(dummy,EnemyBuilder.baseEnemy().fireEnemy().build()));
+        List<Battle> battles = Arrays.asList(battle);
+        donjon = new Donjon(battles);
+        donjon.run(player);
         System.out.println(dummy.getWord());
     }
 

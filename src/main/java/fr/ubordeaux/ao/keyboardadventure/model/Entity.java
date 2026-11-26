@@ -3,7 +3,7 @@ package fr.ubordeaux.ao.keyboardadventure.model;
 public abstract class Entity {
 
     private int maxHealth;
-    private int health;
+    public int health;
     private int attack;
     private  boolean isAlive = true;
 
@@ -17,7 +17,6 @@ public abstract class Entity {
     public void attack(Entity entity) {
         entity.hurt(attack);
     }
-
 
     public void hurt(int damage) {
         this.health -= damage;

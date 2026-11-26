@@ -1,5 +1,8 @@
 package fr.ubordeaux.ao.keyboardadventure.model.enemy;
 
+import fr.ubordeaux.ao.keyboardadventure.model.Entity;
+import fr.ubordeaux.ao.keyboardadventure.model.Player;
+
 public class EnemyBuilder {
 
     // Properties :
@@ -22,11 +25,11 @@ public class EnemyBuilder {
 
     public EnemyBuilder fireEnemy(){
         //voir pour battle
-        this.enemy = new FireEnemyDecorator(enemy,null);
+        this.enemy = new FireEnemyDecorator(enemy);
         return this;
     }
 
-    public EnemyBuilder fireBall(){
+    public EnemyBuilder fireBall(Entity player){
         this.enemy = new FireBallEnemyDecorator(enemy);
         return this;
     }

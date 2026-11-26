@@ -1,5 +1,6 @@
 package fr.ubordeaux.ao.keyboardadventure.model.enemy;
 
+import fr.ubordeaux.ao.keyboardadventure.model.Battle;
 import fr.ubordeaux.ao.keyboardadventure.model.Entity;
 
 abstract class EnemyDecorator implements Enemy {
@@ -40,5 +41,15 @@ abstract class EnemyDecorator implements Enemy {
     @Override 
     public boolean isAlive(){
         return enemyDecorator.isAlive();
+    }
+
+    @Override
+    public void setBattle(Battle battle){
+        enemyDecorator.setBattle(battle);
+    }
+
+    @Override
+    public Battle getBattle(){
+        return enemyDecorator.getBattle();
     }
 }

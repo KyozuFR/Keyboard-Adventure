@@ -25,7 +25,7 @@ public class Donjon {
         start(player);
         while (!isOver()) {
             Battle battle = getCurrentBattle();
-            battle.run();
+            battle.run(player);
             nextBattle();
         }
     }

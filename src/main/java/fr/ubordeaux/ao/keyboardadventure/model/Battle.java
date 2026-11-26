@@ -14,13 +14,15 @@ public class Battle {
     private Player player;
     private Timer timer;
     private List<Enemy> enemies;
-
+    private List<Enemy> projectlist = new ArrayList<Enemy>();
 
     // Constructor :
-    public Battle(Player player, List<Enemy> enemies) {
-        this.player = player;
+    public Battle( List<Enemy> enemies) {
         this.enemies = enemies;
 
+        for (Enemy enemy : enemies){
+            enemy.setBattle(this);
+        }
         this.timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -32,10 +34,11 @@ public class Battle {
     }
 
     // Methods :
-    public void run() {
+    public void run(Player player) {
+        this.player = player;
         start();
         while(!isOver()) {
-            System.out.println("Run");
+            //System.out.println("Run");
         }
     }
 
@@ -64,7 +67,9 @@ public class Battle {
 
     public void enemiesAttack() {
         for (Enemy enemy : enemies) {
-            enemy.attack(player);
+            if(enemy.isAlive()){
+                enemy.attack(player);
+            }
         }
     }
 
@@ -78,6 +83,13 @@ public class Battle {
     }
 
     public void addEnemy(Enemy enemy){
+        enemy.setBattle(this);
         enemies.add(enemy);
+    }
+
+    public void addProjectile(Enemy enemy){
+        projectlist.add(enemy);
+        enemy.setBattle(this);
+        enemy.attack(player);
     }
 }
