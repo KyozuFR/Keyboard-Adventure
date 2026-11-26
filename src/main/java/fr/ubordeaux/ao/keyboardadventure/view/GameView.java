@@ -26,6 +26,7 @@ public class GameView extends View implements Observer {
     // Properties :
     private final Scene scene;
     private PlayerEntity player;
+    private Label currentWordLabel;
     private List<EnemyEntity> enemies;
     private List<Label> enemyLabels;
     private IsometricRenderer renderer;
@@ -49,6 +50,11 @@ public class GameView extends View implements Observer {
         scene.startAnimation(24);
         scene.setZoom(ZOOM);
         scene.show();
+
+        // Add label for currentWord :
+        this.currentWordLabel = new Label();
+        this.currentWordLabel.setBounds(0, scene.getPanel().getWidth() / 2, 500, 20);
+        getPanel().add(this.currentWordLabel);
 
         this.enemies = new ArrayList<>();
         this.enemyLabels = new ArrayList<>();
@@ -179,4 +185,8 @@ public class GameView extends View implements Observer {
         player.setIdleAnimation();
     }
 
+    @Override
+    public void updateWord(String word) {
+        currentWordLabel.setText(word);
+    }
 }

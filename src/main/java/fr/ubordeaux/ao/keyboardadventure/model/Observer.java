@@ -12,4 +12,6 @@ public interface Observer {
     void updateEnemyAttack(int index);
 
     void updatePlayerAttack();
+
+    void updateWord(String word);
 }

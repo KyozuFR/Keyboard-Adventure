@@ -33,6 +33,10 @@ public class Player implements Entity {
         return result;
     }
 
+    public String getCurrentWord() {
+        return currentWord;
+    }
+
     @Override
     public int getHealth() {
         return health;

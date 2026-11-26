@@ -43,17 +43,17 @@ public class Model implements Subject {
 
     public void submitWord() {
         donjon.getCurrentBattle().playerSubmit();
-        notifyObservers();
+        notifyWordObservers();
     }
 
     public void typeChar(char c) {
         player.writeChar(c);
-        notifyObservers();
+        notifyWordObservers();
     }
 
     public void eraseChar() {
         player.eraseChar();
-        notifyObservers();
+        notifyWordObservers();
     }
 
     @Override
@@ -69,6 +69,12 @@ public class Model implements Subject {
     public static void notifyStartBattleObservers(int n, List<String> labels) {
         for(Observer o : observers) {
             o.updateStartBattle(n, labels);
+        }
+    }
+
+    public void notifyWordObservers() {
+        for(Observer o : observers) {
+            o.updateWord(player.getCurrentWord());
         }
     }
 
