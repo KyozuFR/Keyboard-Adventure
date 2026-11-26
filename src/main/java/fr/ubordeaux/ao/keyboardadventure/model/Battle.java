@@ -10,27 +10,23 @@ import java.util.TimerTask;
 public class Battle {
 
     // Properties :
-    private static final long DELAY = 10; // Attack delay in s
+    private static final long PERIOD = 10; // Attack delay in s
     private Player player;
-    private Timer timer;
     private List<Enemy> enemies;
     private List<Enemy> projectlist = new ArrayList<Enemy>();
 
-    // Constructor :
-    public Battle( List<Enemy> enemies) {
-        this.enemies = enemies;
+    private long clock;
+    private long prevDateTime;
 
-        for (Enemy enemy : enemies){
+    // Constructor :
+    public Battle(Player player, List<Enemy> enemies) {
+        this.player = player;
+        this.enemies = enemies;
+        this.clock = 0;
+        this.prevDateTime = System.currentTimeMillis();
+                for (Enemy enemy : enemies){
             enemy.setBattle(this);
         }
-        this.timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                enemiesAttack();
-            }
-        };
-        timer.schedule(task, DELAY * 1000);
     }
 
     // Methods :
@@ -38,14 +34,14 @@ public class Battle {
         this.player = player;
         start();
         while(!isOver()) {
-            //System.out.println("Run");
+            processClock();
         }
     }
 
     public void start() {
         // Restore enemies health
-        for(Enemy entity : enemies) {
-            entity.reset();
+        for(Enemy enemy : enemies) {
+            enemy.reset();
         }
     }
 
@@ -91,5 +87,16 @@ public class Battle {
         projectlist.add(enemy);
         enemy.setBattle(this);
         enemy.attack(player);
+    }
+
+    public void processClock() {
+        long currentDateTime = System.currentTimeMillis();
+        clock += currentDateTime - prevDateTime;
+        prevDateTime = currentDateTime;
+
+        if(clock >= PERIOD * 1000) {
+            this.enemiesAttack();
+            clock = 0;
+        }
     }
 }

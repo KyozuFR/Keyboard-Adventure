@@ -12,8 +12,7 @@ public class Player extends Entity {
         super(health,Damage);
         this.currentWord = "";
     }
-
-
+    
     @Override
     public void hurt(int damage){
         super.hurt(damage);
@@ -23,6 +22,13 @@ public class Player extends Entity {
     // Methods :
     public void writeChar(char c) {
         currentWord += c;
+    }
+
+    public void eraseChar() {
+        if(currentWord == null || currentWord.isEmpty()) {
+            return;
+        }
+        currentWord = currentWord.substring(0, currentWord.length()-1);
     }
 
     public String submitWord() {

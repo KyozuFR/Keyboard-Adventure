@@ -5,7 +5,7 @@ import java.util.List;
 public class Donjon {
 
     // Properties :
-    Player player;
+    private Player player;
     private final List<Battle> battles;
     private int index;
 
@@ -40,5 +40,9 @@ public class Donjon {
 
     public Battle getCurrentBattle() {
         return battles.get(index);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
