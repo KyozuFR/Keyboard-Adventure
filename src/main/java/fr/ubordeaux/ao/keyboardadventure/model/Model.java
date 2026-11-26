@@ -43,7 +43,6 @@ public class Model implements Subject {
 
     public void submitWord() {
         donjon.getCurrentBattle().playerSubmit();
-        System.out.println("Fait");
         notifyObservers();
     }
 

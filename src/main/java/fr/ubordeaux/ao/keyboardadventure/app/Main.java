@@ -1,4 +1,5 @@
 package fr.ubordeaux.ao.keyboardadventure.app;
+import fr.ubordeaux.ao.keyboardadventure.controller.BagOfCommands;
 import fr.ubordeaux.ao.keyboardadventure.controller.Controller;
 import fr.ubordeaux.ao.keyboardadventure.controller.KeyboardController;
 import fr.ubordeaux.ao.keyboardadventure.model.Model;
@@ -29,11 +30,7 @@ public final class Main {
         Thread thread = new Thread(model::debugDonjon);
         thread.start();
 
-        Thread thread_command = new Thread(() -> {
-            while(true) {
-                controller.executeAll();
-            }
-        });
+        Thread thread_command = new Thread(BagOfCommands.INSTANCE);
         thread_command.start();
     }
 }
