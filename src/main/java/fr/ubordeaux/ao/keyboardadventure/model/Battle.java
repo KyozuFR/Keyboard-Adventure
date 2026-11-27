@@ -70,7 +70,6 @@ public class Battle {
 
         String word = player.submitWord();
         for(int i = 0; i < enemies.size(); i++) {
-
             Enemy enemy = enemies.get(i);
             if(enemy.isAlive() && word.compareTo(enemy.getWord()) == 0) {
                 player.attack((Entity)enemy);

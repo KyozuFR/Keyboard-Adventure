@@ -31,6 +31,7 @@ public class Model implements Subject {
 
         List<Battle> battles = new ArrayList<>();
         battles.add(new Battle(enemies));
+        battles.add(new Battle(enemies));
         Donjon donjon = new Donjon(battles);
 
         startDonjon(player, donjon);
