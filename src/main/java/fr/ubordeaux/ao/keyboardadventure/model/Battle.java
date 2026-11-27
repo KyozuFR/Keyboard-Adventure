@@ -1,6 +1,7 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
+import fr.ubordeaux.ao.keyboardadventure.view.GameView;
 
 import java.util.List;
 
@@ -53,8 +54,9 @@ public class Battle {
     }
 
     public void enemiesAttack() {
-        for (Enemy enemy : enemies) {
-            enemy.attack(player);
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).attack(player);
+            Model.notifyEnemyAttackObservers(i);
         }
     }
 

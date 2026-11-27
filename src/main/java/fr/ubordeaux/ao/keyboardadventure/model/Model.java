@@ -73,6 +73,18 @@ public class Model implements Subject {
         }
     }
 
+    public static void notifyEnemyAttackObservers(int index) {
+        for(Observer o : observers) {
+            o.updateEnemyAttack(index);
+        }
+    }
+
+    public static void notifyEnemyDeathObservers(int index) {
+        for(Observer o : observers) {
+            o.updateEnemyDeath(index);
+        }
+    }
+
     public void notifyWordObservers() {
         for(Observer o : observers) {
             o.updateWord(player.getCurrentWord());
