@@ -35,7 +35,7 @@ public class Donjon {
             }
 
             Model.notifyStartBattleObservers(battle.countEnemy(), labels);
-            battle.run();
+            battle.run(player);
             nextBattle();
         }
     }

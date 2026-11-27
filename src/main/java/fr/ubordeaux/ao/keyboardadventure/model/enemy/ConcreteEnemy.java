@@ -1,25 +1,23 @@
 package fr.ubordeaux.ao.keyboardadventure.model.enemy;
 
+import fr.ubordeaux.ao.keyboardadventure.model.Battle;
 import fr.ubordeaux.ao.keyboardadventure.model.Entity;
 
-public class ConcreteEnemy implements Enemy {
+public class ConcreteEnemy extends Entity implements Enemy {
 
     // Properties :
-    private int maxHealth = 1;
-    private int health = maxHealth;
     private String word = "araigne";
-    private  int damage = 1;
+    private Battle battle;
+
 
     // Constructors :
     public ConcreteEnemy(){
-
+        super(1, 1);
     }
 
-    public ConcreteEnemy(int health, String word, int damage){
-        this.maxHealth = health;
-        this.health = maxHealth;
+    public ConcreteEnemy(int HP, String word,int damage){
+        super(HP, damage);
         this.word = word;
-        this.damage = damage;
     }
 
     // Methods :
@@ -29,29 +27,12 @@ public class ConcreteEnemy implements Enemy {
     }
 
     @Override
-    public void attack(Entity entity) {
-        entity.hurt(damage);
+    public void setBattle(Battle battle){
+        this.battle = battle;
     }
 
     @Override
-    public void hurt(int damage) {
-        health -= damage;
-        if(health <=0){
-            die();
-        }
-    }
-
-    @Override
-    public int getHealth() {
-        return this.health;
-    }
-
-    @Override
-    public void reset() {
-        health = maxHealth;
-    }
-
-    private void die(){
-        //TO DO
+    public Battle getBattle(){
+        return this.battle;
     }
 }

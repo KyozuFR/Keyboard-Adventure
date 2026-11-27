@@ -1,8 +1,8 @@
 package fr.ubordeaux.ao.keyboardadventure.model;
 
 import fr.ubordeaux.ao.keyboardadventure.model.enemy.Enemy;
-import fr.ubordeaux.ao.keyboardadventure.view.GameView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Battle {
@@ -11,60 +11,72 @@ public class Battle {
     private static final long PERIOD = 7; // Attack delay in s
     private Player player;
     private List<Enemy> enemies;
+    private List<Enemy> projectlist = new ArrayList<Enemy>();
     private long clock;
     private long prevDateTime;
 
     // Constructor :
-    public Battle(Player player, List<Enemy> enemies) {
-        this.player = player;
+    public Battle(List<Enemy> enemies) {
         this.enemies = enemies;
         this.clock = 0;
         this.prevDateTime = System.currentTimeMillis();
     }
 
     // Methods :
-    public void run() {
+    public void run(Player player) {
+        this.player = player;
         start();
         while(!isOver()) {
             processClock();
         }
+        System.out.println("Fini !");
     }
 
     public void start() {
         // Restore enemies health
-        for(Entity entity : enemies) {
-            entity.reset();
+        for(Enemy enemy : enemies) {
+            enemy.reset();
         }
     }
 
     public boolean isOver() {
 
         // Condition de défaite (le joueur est vaincu)
-        if(player.getHealth() <= 0) {
+        if(!player.isAlive()) {
             return true;
         }
 
         // Condition de victoire (tous les ennemy sont vaincus)
+        int count = 0;
         for(Enemy enemy : enemies) {
-            if (enemy.getHealth() > 0) {
-                return false;
+            if (!enemy.isAlive()) {
+                count++;
             }
         }
-        return true;
+        return count == enemies.size();
     }
 
     public void enemiesAttack() {
         for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).attack(player);
-            Model.notifyEnemyAttackObservers(i);
+            Enemy enemy = enemies.get(i);
+            if(enemy.isAlive()) {
+                enemy.attack(player);
+                Model.notifyEnemyAttackObservers(i);
+            }
         }
     }
 
     public void playerSubmit() {
+
         String word = player.submitWord();
-        for(Enemy enemy : enemies) {
-            if(word.compareTo(enemy.getWord()) == 0) {
-                player.attack(enemy);
+        for(int i = 0; i < enemies.size(); i++) {
+
+            Enemy enemy = enemies.get(i);
+            if(enemy.isAlive() && word.compareTo(enemy.getWord()) == 0) {
+                player.attack((Entity)enemy);
+                if(!enemy.isAlive()) {
+                    Model.notifyEnemyDeathObservers(i);
+                }
             }
         }
     }
@@ -86,5 +98,16 @@ public class Battle {
 
     public List<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public void addEnemy(Enemy enemy) {
+        enemy.setBattle(this);
+        this.enemies.add(enemy);
+    }
+
+    public void addProjectile(Enemy enemy){
+        projectlist.add(enemy);
+        enemy.setBattle(this);
+        enemy.attack(player);
     }
 }

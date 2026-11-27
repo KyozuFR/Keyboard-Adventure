@@ -150,11 +150,11 @@ public class GameView extends View implements Observer {
 
         // On remove son mot
         Label label = enemyLabels.get(index);
-        enemyLabels.remove(label);
+        // enemyLabels.remove(label);
         getPanel().remove(label);
         
         // On remove la spider
-        enemies.remove(entity);
+        // enemies.remove(entity);
         scene.removeRenderable(entity);
     }
 

@@ -21,7 +21,7 @@ public class Model implements Subject {
 
     // Methods :
     public void debugDonjon() {
-        player = new Player(50);
+        player = new Player(50,1);
         List<Enemy> enemies = new ArrayList<>();
 
         EnemyBuilder builder = EnemyBuilder.baseEnemy();
@@ -30,7 +30,7 @@ public class Model implements Subject {
         enemies.add(builder.build());
 
         List<Battle> battles = new ArrayList<>();
-        battles.add(new Battle(player, enemies));
+        battles.add(new Battle(enemies));
         Donjon donjon = new Donjon(battles);
 
         startDonjon(player, donjon);
