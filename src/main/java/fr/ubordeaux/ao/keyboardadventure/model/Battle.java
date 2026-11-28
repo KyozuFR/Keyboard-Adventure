@@ -67,17 +67,24 @@ public class Battle {
     }
 
     public void playerSubmit() {
+        System.out.println("Begin submit");
 
         String word = player.submitWord();
+
         for(int i = 0; i < enemies.size(); i++) {
+
             Enemy enemy = enemies.get(i);
             if(enemy.isAlive() && word.compareTo(enemy.getWord()) == 0) {
                 player.attack((Entity)enemy);
+                Model.notifyPlayerAttackObservers();
+
                 if(!enemy.isAlive()) {
                     Model.notifyEnemyDeathObservers(i);
                 }
             }
         }
+
+        System.out.println("End submit");
     }
 
     public void processClock() {

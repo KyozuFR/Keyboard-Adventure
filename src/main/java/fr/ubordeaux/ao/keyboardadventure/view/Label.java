@@ -17,7 +17,7 @@ public class Label extends JLabel {
     }
 
     public Label() {
-        this("", 18);
+        this("", 21);
     }
 
     // Methods :

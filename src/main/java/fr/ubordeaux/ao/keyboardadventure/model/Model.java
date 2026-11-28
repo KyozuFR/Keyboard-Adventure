@@ -31,7 +31,12 @@ public class Model implements Subject {
 
         List<Battle> battles = new ArrayList<>();
         battles.add(new Battle(enemies));
+
+        enemies = new ArrayList<>();
+        builder = EnemyBuilder.baseEnemy();
+        enemies.add(builder.build());
         battles.add(new Battle(enemies));
+
         Donjon donjon = new Donjon(battles);
 
         startDonjon(player, donjon);
@@ -45,7 +50,6 @@ public class Model implements Subject {
     public void submitWord() {
         donjon.getCurrentBattle().playerSubmit();
         notifyWordObservers();
-        notifyPlayerAttackObservers();
     }
 
     public void typeChar(char c) {
@@ -92,7 +96,7 @@ public class Model implements Subject {
         }
     }
 
-    public void notifyPlayerAttackObservers() {
+    public static void notifyPlayerAttackObservers() {
         for(Observer o : observers) {
             o.updatePlayerAttack();
         }

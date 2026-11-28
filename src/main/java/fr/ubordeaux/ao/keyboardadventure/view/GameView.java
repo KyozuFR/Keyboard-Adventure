@@ -20,7 +20,7 @@ public class GameView extends View implements Observer {
 
     // Constants :
     private static final int SCENE_SIZE = 10;
-    private static final int ZOOM = 2;
+    private static final int ZOOM = 1;
     private static final boolean DEBUG = true;
 
     // Properties :
@@ -38,7 +38,7 @@ public class GameView extends View implements Observer {
         this.renderer.setDebug(DEBUG);
         this.renderer.setZoom(ZOOM);
 
-        this.scene = new Scene(800, 600, SCENE_SIZE, SCENE_SIZE);
+        this.scene = new Scene(1500, 1200, SCENE_SIZE, SCENE_SIZE);
         scene.setDebug(DEBUG);
 
         getPanel().setLayout(null);
@@ -54,7 +54,7 @@ public class GameView extends View implements Observer {
 
         // Add label for currentWord :
         this.currentWordLabel = new Label();
-        this.currentWordLabel.setBounds(0, 0, 800, 25);
+        this.currentWordLabel.setBounds(0, 0, 800, 40);
         getPanel().add(this.currentWordLabel);
 
         // Enemies :
@@ -77,6 +77,14 @@ public class GameView extends View implements Observer {
 
     public JPanel getPanel() {
         return scene.getPanel();
+    }
+
+    public void sleep(int ms) {
+        try {
+            TimeUnit.MILLISECONDS.sleep(ms);
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
@@ -104,11 +112,7 @@ public class GameView extends View implements Observer {
 
             for(int j = 0; j < 24; j++) {
                 entity.moveInDirection(0, -0.25);
-                try {
-                    TimeUnit.MILLISECONDS.sleep(50);
-                } catch (Exception e) {
-
-                }
+                sleep(50);
             }
         }
     }
@@ -132,6 +136,7 @@ public class GameView extends View implements Observer {
 
     @Override
     public void updateStartBattle(int n, List<String> words) {
+        System.out.println("Update start");
         cleanEntity();
         addEnemies(n);
         addLabels(n, words);
@@ -139,20 +144,17 @@ public class GameView extends View implements Observer {
 
     @Override
     public void updateEnemyDeath(int index) {
+
         EnemyEntity entity = enemies.get(index);
         entity.setDeathAnimation();
-
-        try {
-            TimeUnit.MILLISECONDS.sleep(500);
-        } catch (Exception e) {
-
-        }
 
         // On remove son mot
         Label label = enemyLabels.get(index);
         // enemyLabels.remove(label);
         getPanel().remove(label);
-        
+
+        sleep(500);
+
         // On remove la spider
         // enemies.remove(entity);
         scene.removeRenderable(entity);
@@ -163,13 +165,7 @@ public class GameView extends View implements Observer {
         EnemyEntity entity = enemies.get(index);
         entity.setAttackAnimation();
         player.setHitAnimation();
-
-        try {
-            TimeUnit.MILLISECONDS.sleep(500);
-        } catch (Exception e) {
-
-        }
-
+        sleep(500);
         entity.setWalkAnimation();
         player.setIdleAnimation();
     }
@@ -177,13 +173,7 @@ public class GameView extends View implements Observer {
     @Override
     public void updatePlayerAttack() {
         player.setAttackAnimation();
-
-        try {
-            TimeUnit.MILLISECONDS.sleep(500);
-        } catch (Exception e) {
-
-        }
-
+        sleep(500);
         player.setIdleAnimation();
     }
 

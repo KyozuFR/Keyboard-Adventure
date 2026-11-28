@@ -45,11 +45,15 @@ public final class Main {
         view.getPanel().setFocusable(true);
         model.addObserver(view);
 
+        // Thread Model
         Thread thread = new Thread(model::debugDonjon);
         thread.start();
 
+        // Thread Controller
         Thread thread_command = new Thread(BagOfCommands.INSTANCE);
         thread_command.start();
+
+        // Thread main = View
     }
 }
 
